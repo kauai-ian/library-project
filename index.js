@@ -3,22 +3,28 @@ const showFormBtn = document.querySelector(".showFormBtn");
 const modal = document.querySelector(".modal");
 const closeBtn = document.querySelector(".close");
 const changeStatus = document.querySelector(".changeStatus");
-const status = document.querySelector(".status");
+const status = document.querySelector(".haveRead");
 const removeBtn = document.querySelector(".removeBtn");
 let formData = document.querySelector(".formData");
+const submitBtn = document.querySelector(".submitBtn")
+const card = document.querySelector(".book-card");
 
-// displays the form when button clicked
-showFormBtn.addEventListener("click", function () {
+// event listeners
+submitBtn.addEventListener("click", submitForm);
+showFormBtn.addEventListener("click", showForm); // displays the form when button clicked
+closeBtn.addEventListener("click", closeModal); //closes the form dialog modal
+card.addEventListener("click", changeReadStatus);
+card.addEventListener("click", removeBook);
+
+function showForm() {
   modal.style.display = "block";
-});
-//closes the form dialog modal
-closeBtn.addEventListener("click", function () {
+}
+
+function closeModal() {
   modal.style.display = "none";
-});
+}
 
-
-// create event listener to take form data when clicked and turn into an object with the same prototype as the existing objects.
-formData.addEventListener("submit", function (e) {
+function submitForm(e) {
   e.preventDefault();
   formData = new FormData(formData);
   const newBook = {
@@ -31,7 +37,7 @@ formData.addEventListener("submit", function (e) {
   addBookToLibrary([newBook]); // pass the new book as an array to the function
   e.target.reset(); // reset form data
   modal.style.display = "none"; // Close the modal after submission
-});
+}
 
 // array of books
 const books = [
@@ -72,9 +78,6 @@ for (let i = 0; i < books.length; i++) {
 //DOM Manipulation
 function addBookToLibrary(library) {
   console.log("adding books to the library...");
-  // card in html for books that looksup the html class
-  const card = document.querySelector(".book-card");
-
   // loop through library array to the end of its length. create a variable to hold each library item.
   for (let i = 0; i < library.length; i++) {
     const book = library[i];
@@ -98,36 +101,37 @@ function addBookToLibrary(library) {
     card.appendChild(bookInfo);
     console.log(`added book: ${book.title}`);
   }
-
-// changes the haveRead status.
-// check if the clicked element is the change status button within the loop. 
-card.addEventListener("click", function (event) {
-  if (event.target.classList.contains("changeStatus")) {
-    const bookInfo = event.target.parentElement;
-    const bookIndex = bookInfo.dataset.bookIndex;
-    const statusElement = bookInfo.querySelector(".status");
-    //toggle the status
-    myLibrary[bookIndex].haveRead =
-      myLibrary[bookIndex].haveRead === "read" ? "not read" : "read";
-    //update the status
-    statusElement.textContent = myLibrary[bookIndex].haveRead;
-  }
-});
-  // removes the book from the library - Need to fix.
-  // Listen for a click on button to Target the parent and remove the parent and any items with the data tag.
-  card.addEventListener("click", function (e) {
-    if (e.target.classList.contains("removeBtn")) {
-      const bookInfo = e.target.parentElement;
-      const bookIndex = bookInfo.dataset.bookIndex;
-      // Remove the book from the library array
-      myLibrary.splice(bookIndex, 1);
-      // Remove the book element from the DOM
-      bookInfo.remove();
-    }
-  });
 }
 //call function to display books
 addBookToLibrary(myLibrary);
+
+// changes the haveRead status.
+// check if the clicked element is the change status button within the loop.
+function changeReadStatus(event) {
+  if (event.target.classList.contains("changeStatus")) {
+    const bookInfo = event.target.parentElement;
+    const bookIndex = bookInfo.dataset.bookIndex;
+    //toggle the status
+    myLibrary[bookIndex].haveRead =
+      myLibrary[bookIndex].haveRead === "read" ? "not read" : "read";
+    myLibrary[bookIndex].haveRead === "not read" ? "read" : "not read";
+    //update the status
+    statusElement.textContent = myLibrary[bookIndex].haveRead;
+  }
+}
+
+// removes the book from the library - Need to fix.
+// Listen for a click on button to Target the parent and remove the parent and any items with the data tag.
+function removeBook(e) {
+  if (e.target.classList.contains("removeBtn")) {
+    const bookInfo = e.target.parentElement;
+    const bookIndex = bookInfo.dataset.bookIndex;
+    // Remove the book from the library array
+    myLibrary.splice(bookIndex, 1);
+    // Remove the book element from the DOM
+    bookInfo.remove();
+  }
+}
 
 // object constructor
 // function Book(title, author, pages, haveRead) {
