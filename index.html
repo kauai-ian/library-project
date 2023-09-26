@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library Project</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair:ital,opsz,wght@0,5..1200,300;0,5..1200,400;0,5..1200,500;0,5..1200,600;0,5..1200,700;0,5..1200,800;1,5..1200,300;1,5..1200,400;1,5..1200,500;1,5..1200,600;1,5..1200,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <script src="index.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <h1>Library Project</h1>
+      <p>What books I have been reading lately and what do I want to read?</p>
+    </header>
+    <button class="showFormBtn">Add New Book</button>
+    <div class="modal">
+      <form class="formData">
+        <span class="close">&times;</span>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" />
+        <label for="author">Author:</label>
+        <input type="text" id="author" name="author" />
+        <label for="pages">Pages:</label>
+        <input type="text" id="pages" name="pages" />
+        <label for="haveRead">Have read status:</label>
+        <input type="text" id="haveRead" name="haveRead" />
+        <input type="submit" value="submit" class="submitBtn" />
+      </form>
+    </div>
+    <section class="cards">
+      <div class="book-card"></div>
+    </section>
+  </body>
+</html>
