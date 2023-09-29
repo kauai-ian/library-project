@@ -14,13 +14,28 @@
   </head>
   <body>
     <header>
-      <h1>Library Project</h1>
-      <p>What books I have been reading lately and what do I want to read?</p>
+      <h1 style="display: inline">Library</h1>
+      <h1
+        style="
+          color: #40bcd8;
+          text-transform: uppercase;
+          font-family: 'Roboto';
+          display: inline;
+        "
+      >
+        Project
+      </h1>
+      <p>
+        What books have I been reading lately and what do I want to read?
+      </p>
     </header>
-    <button class="showFormBtn">Add New Book</button>
+    <div class="btnContainer">
+      <button class="showFormBtn">Add New Book</button>
+    </div>
     <div class="modal">
       <form class="formData">
         <span class="close">&times;</span>
+        <h3>Add a new book</h3>
         <label for="title">Title:</label>
         <input type="text" id="title" name="title" />
         <label for="author">Author:</label>
@@ -33,7 +48,14 @@
       </form>
     </div>
     <section class="cards">
-      <div class="book-card"></div>
+      <div class="bookCard"></div>
     </section>
   </body>
+  <footer>
+    <div class="footerContainer">
+        <a href="https://github.com/kauai-ian" target="_blank">
+          <img src="./images/github.svg" alt="github" width="25px">
+            <p>Made on Planet Earth by Ian Tierney</p>
+        </a>
+    </div>
 </html>
