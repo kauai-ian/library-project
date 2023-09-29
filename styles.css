@@ -70,6 +70,18 @@ p {
   line-height: 1.5rem;
 }
 
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-width: 375px;
+  width: auto;
+}
+
+section {
+  flex: 1;
+}
+
 /* Header */
 header {
   height: 30vh;
@@ -194,10 +206,12 @@ header p {
   padding: 10px;
 }
 
+/* footer */
 footer {
   background-color: #dddada;
   padding: 20px;
   width: 100vw;
+  margin-top: 50px;
 }
 
 .footerContainer {
@@ -235,6 +249,7 @@ footer {
   .bookInfo {
     width: 90vw;
     max-width: 400px;
+    min-width: 200px;
     height: 25vh;
     max-height: 300px;
     margin: 0;
