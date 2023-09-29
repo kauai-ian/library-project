@@ -94,7 +94,7 @@ header p {
   grid-template-rows: repeat(250px);
   row-gap: 10px;
   width: 98vw;
-  height: 70vh;
+  height: auto;
   margin-left: 20px;
 }
 
@@ -202,7 +202,6 @@ footer {
 
 .footerContainer {
   display: flex;
-
   padding-left: 2rem;
 }
 
@@ -244,4 +243,6 @@ footer {
   .showFormBtn {
     width: 200px;
   }
+
+  
 }
