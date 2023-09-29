@@ -9,5 +9,5 @@ This project was built with HTML, CSS and Javascript.
 Desktop view
 ![Alt text](<images/ss_desktop_Library-project.png>)
 Mobile view
-![Mobile view screenshot](</images/ss_mobile_Library-project.png>)
+![Mobile view screenshot](</images/mobile_ss.png>)
 
