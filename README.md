@@ -7,7 +7,7 @@ The user can add new books, change the read status and remove the book.
 This project was built with HTML, CSS and Javascript.
 
 Desktop view
-![Alt text](<images/ss_desktop_Library-project_ (1).png>)
+![Alt text](<images/ss_desktop_Library-project.png>)
 Mobile view
-![Mobile view screenshot](</images/ss_mobile_Library-project_.png>)
+![Mobile view screenshot](</images/ss_mobile_Library-project.png>)
 
