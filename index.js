@@ -3,7 +3,6 @@ let newBook;
 const showFormBtn = document.querySelector(".showFormBtn");
 const modal = document.querySelector(".modal");
 const closeBtn = document.querySelector(".close");
-const changeStatus = document.querySelector(".changeStatus");
 const readBtn = document.querySelector(".read");
 const removeBtn = document.querySelector(".removeBtn");
 let form = document.querySelector(".formData");
@@ -30,7 +29,7 @@ class Book {
   constructor(title, author, pages, read) {
     this.title = form.title.value;
     this.author = form.author.value;
-    this.pages = form.pages.value + 'pages';
+    this.pages = form.pages.value + " pages";
     this.read = form.read.checked;
   }
 }
@@ -38,10 +37,10 @@ class Book {
 // submit form
 function addBookToLibrary(e) {
   e.preventDefault();
-  const title = form.querySelector('#title').value;
-  const author = form.querySelector('#author').value;
-  const pages = form.querySelector('#pages').value;
-  const read = form.querySelector('#read').checked;
+  const title = form.querySelector("#title").value;
+  const author = form.querySelector("#author").value;
+  const pages = form.querySelector("#pages").value;
+  const read = form.querySelector("#read").checked;
 
   newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
@@ -59,7 +58,7 @@ function render() {
 }
 
 //DOM elements to be used in render()
-function createBook(book) {
+function createBook(book, index) {
   console.log("adding books to the library...");
   const bookDiv = document.createElement("div");
   const titleDiv = document.createElement("div");
@@ -68,36 +67,81 @@ function createBook(book) {
   const removeBtn = document.createElement("button");
   const readBtn = document.createElement("button");
   bookDiv.classList.add("book");
-  titleDiv.textContent = book.title; 
+  bookDiv.setAttribute('data-book-index',index);
+  titleDiv.textContent = book.title;
   titleDiv.setAttribute("id", "title");
   bookDiv.appendChild(titleDiv);
-  authDiv.textContent = book.author; 
+  authDiv.textContent = book.author;
   authDiv.setAttribute("id", "author");
   bookDiv.appendChild(authDiv);
-  pageDiv.textContent = book.pages; 
+  pageDiv.textContent = book.pages;
   pageDiv.setAttribute("id", "pages");
   bookDiv.appendChild(pageDiv);
   readBtn.classList.add("readBtn");
   bookDiv.appendChild(readBtn);
-  book.read = readBtn.textContent === "read" ? "not read" : "read"; 
-  removeBtn.textContent = "Remove"; 
+  readBtn.textContent = book.read ? "Read" : "Not Read";
+  removeBtn.textContent = "Remove";
   removeBtn.classList.add("removeBtn");
   bookDiv.appendChild(removeBtn);
   cardContainer.appendChild(bookDiv);
 
-
-  removeBtn.addEventListener("click", removeBook);
-  readBtn.addEventListener("click", changeReadStatus);
+  removeBtn.addEventListener("click", () => removeBook(index));
+  readBtn.addEventListener("click", () => changeReadStatus(index));
 }
 
-function changeReadStatus(book) {
-  book.read = !book.read;
-  render();
-  console.log(`changed status of ${bookDiv[i].title}`);
+function changeReadStatus(index) {
+  myLibrary[index].read = !myLibrary[index].read;
+  console.log(`changed status of ${myLibrary[index].title}`);
+  render()
 }
 
 function removeBook(index) {
   myLibrary.splice(index, 1);
-  render();
-  console.log(`removed book: ${bookDiv[i].title}`);
+  book.dataset.remove();
+  console.log(`removed book: ${myLibrary[index].title}`);
+  render()
 }
+
+
+//couldnt get this to work: load default books on page load. Because the Book constructor was pulling data from the form. And the above is an array of objects. 
+// array of books
+const defaultBooks = [
+  {
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    pages: "259",
+    read: "read",
+  },
+
+  {
+    title: "Dune",
+    author: "Frank Herbert",
+    pages: "896",
+    read: "read",
+  },
+
+  {
+    title: "The Three Body Problem",
+    author: "Liu Cixin",
+    pages: "302",
+    read: "read",
+  },
+
+  {
+    title: "Snow Crash",
+    author: "Neal Stephenson",
+    pages: "480",
+    read: "read",
+  },
+];
+// // Add placeholder books to the mylibrary array using a for loop. How? Push the object book to the library array.
+// function addDefaultBooksToLibrary() {
+//   for (let i = 0; i < defaultBooks.length; i++) {
+//     const { title, author, pages, read } = defaultBooks[i];
+//     const newDefaultBooks = new Book(title, author, pages, read);
+//     myLibrary.push(newDefaultBooks[i]);
+//     createBook(newDefaultBooks, myLibrary.length);
+//     console.log(`pushed book into library: ${defaultBooks[i].title}`);
+//   }
+// }
+// addDefaultBooksToLibrary();

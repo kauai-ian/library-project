@@ -114,7 +114,7 @@ header p {
 
 .book {
   width: 30vw;
-  max-width: 230px;
+  max-width: 300px;
   min-width: 200px;
   height: auto;
   max-height: 300px;
@@ -123,6 +123,7 @@ header p {
   background-color: var(--verylightblue);
   border-radius: 10px;
   box-shadow: 0px 5px 10px rgb(0 0 0 / 0.3);
+  line-height: 3rem;
 }
 
 .btnContainer {
@@ -150,25 +151,40 @@ header p {
   margin-top: 20px;
 }
 
-.changeStatus {
-  padding: 5px;
+.book #title {
+  font-size: 2rem;
+}
+
+.book #author, .book #pages, .book #read {
+    font-size: 1rem;
+    font-family: "Roboto", sans-serif;
+    color: #333;
+    font-weight: 300;
+    line-height: 1.5rem;
+}
+
+.readBtn {
+  padding: 10px;
   margin-bottom: 10px;
   background-color: var(--lightgray);
   color: white;
   border-radius: 10px;
   border: none;
+  margin-right: 20px;
+  font-size: 1rem;
 }
 
-.changeStatus:hover{
+.readBtn:hover{
   background-color: #18ad24;
 }
 
 .removeBtn {
-  padding: 5px;
+  padding: 10px;
   background-color: var(--lightgray);
   color: white;
   border-radius: 10px;
   border: none;
+  font-size: 1rem;
 }
 
 .removeBtn:hover{
@@ -218,6 +234,9 @@ header p {
   cursor: pointer;
 }
 
+input {
+  font-size: 1.2rem;
+}
 .submitBtn {
   font-size: 20px;
   padding: 10px;
@@ -233,14 +252,18 @@ footer {
 
 .footerContainer {
   display: flex;
-  padding-left: 2rem;
+  justify-content: center;
 }
 
 .footerContainer a {
   text-decoration: none;
-  color: black;
+  color: white;
   display: flex;
   gap: 2rem;
+}
+
+.footerContainer p {
+  color: white;
 }
 
 @media (max-width: 550px) {
@@ -257,13 +280,13 @@ footer {
     margin-right: 40px;
   }
 
-  .bookCard {
+  .cardContainer {
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
     margin: 0;
   }
-  .bookInfo {
+  .book {
     width: 90vw;
     max-width: 400px;
     min-width: 200px;
