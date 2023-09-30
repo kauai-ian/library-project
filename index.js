@@ -1,20 +1,19 @@
-const myLibrary = []; //empty array to hold the library of key value pairs.
+const myLibrary = [];
+let newBook;
 const showFormBtn = document.querySelector(".showFormBtn");
 const modal = document.querySelector(".modal");
 const closeBtn = document.querySelector(".close");
 const changeStatus = document.querySelector(".changeStatus");
-const readStatus = document.querySelector(".haveRead");
+const readBtn = document.querySelector(".read");
 const removeBtn = document.querySelector(".removeBtn");
-let formData = document.querySelector(".formData");
+let form = document.querySelector(".formData");
 const submitBtn = document.querySelector(".submitBtn");
-const card = document.querySelector(".bookCard");
+const cardContainer = document.querySelector(".cardContainer");
 
-// event listeners
-submitBtn.addEventListener("click", submitForm);
+// event listeners to add new book, show the form and close the form.
+submitBtn.addEventListener("click", addBookToLibrary);
 showFormBtn.addEventListener("click", showForm);
 closeBtn.addEventListener("click", closeModal);
-card.addEventListener("click", changeReadStatus);
-card.addEventListener("click", removeBook);
 
 // display form
 function showForm() {
@@ -26,99 +25,79 @@ function closeModal() {
   modal.style.display = "none";
 }
 
+// Book constructor
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = form.title.value;
+    this.author = form.author.value;
+    this.pages = form.pages.value + 'pages';
+    this.read = form.read.checked;
+  }
+}
+
 // submit form
-function submitForm(e) {
+function addBookToLibrary(e) {
   e.preventDefault();
-  formData = new FormData(formData);
-  const newBook = {
-    title: formData.get("title"),
-    author: formData.get("author"),
-    pages: formData.get("pages"),
-    haveRead: formData.get("haveRead"),
-  };
+  const title = form.querySelector('#title').value;
+  const author = form.querySelector('#author').value;
+  const pages = form.querySelector('#pages').value;
+  const read = form.querySelector('#read').checked;
+
+  newBook = new Book(title, author, pages, read);
   myLibrary.push(newBook);
-  addBookToLibrary([newBook]);
-  formData = "";
   modal.style.display = "none";
+  render();
+  form.reset();
 }
 
-// default books
-const books = [
-  {
-    title: "The Hobbit",
-    author: "J.R.R. Tolkien",
-    pages: "259",
-    haveRead: "not read",
-  },
-
-  {
-    title: "Dune",
-    author: "Frank Herbert",
-    pages: "896",
-    haveRead: "read",
-  },
-
-  {
-    title: "The Three Body Problem",
-    author: "Liu Cixin",
-    pages: "302",
-    haveRead: "read",
-  },
-
-  {
-    title: "Shantaram",
-    author: "Gregory David Roberts",
-    pages: "936",
-    haveRead: "read",
-  },
-];
-// Add default books
-for (let i = 0; i < books.length; i++) {
-  myLibrary.push(books[i]);
-  console.log(`pushed book into library: ${books[i].title}`);
+// create book in html
+function render() {
+  for (let i = 0; i < myLibrary.length; i++) {
+    createBook(myLibrary[i]);
+    console.log(`pushed book into library: ${myLibrary[i].title}`);
+  }
 }
 
-//DOM Manipulation
-// go through an a collection of books (i) 
-
-function addBookToLibrary(library) {
+//DOM elements to be used in render()
+function createBook(book) {
   console.log("adding books to the library...");
-  for (let i = 0; i < library.length; i++) {
-    const book = library[i];
-    const bookInfo = document.createElement("div");
-    bookInfo.classList.add("bookInfo");
-    bookInfo.dataset.bookIndex = i;
-    bookInfo.innerHTML = `
-      <h2>${book.title}</h2> 
-      <p>Author: ${book.author}</p> 
-      <p>Pages: ${book.pages}</p> 
-      <p>Status: <span class='readStatus'> ${book.haveRead}</span></p>
-      <div class='btnDiv'>
-      <button class='changeStatus'>Change Status</button>
-      <button class='removeBtn'>Remove Book</button>
-      </div>`;
-    card.appendChild(bookInfo);
-    console.log(`added book: ${book.title}`);
-  }
-}
-addBookToLibrary(myLibrary);
+  const bookDiv = document.createElement("div");
+  const titleDiv = document.createElement("div");
+  const authDiv = document.createElement("div");
+  const pageDiv = document.createElement("div");
+  const removeBtn = document.createElement("button");
+  const readBtn = document.createElement("button");
+  bookDiv.classList.add("book");
+  titleDiv.textContent = book.title; 
+  titleDiv.setAttribute("id", "title");
+  bookDiv.appendChild(titleDiv);
+  authDiv.textContent = book.author; 
+  authDiv.setAttribute("id", "author");
+  bookDiv.appendChild(authDiv);
+  pageDiv.textContent = book.pages; 
+  pageDiv.setAttribute("id", "pages");
+  bookDiv.appendChild(pageDiv);
+  readBtn.classList.add("readBtn");
+  bookDiv.appendChild(readBtn);
+  book.read = readBtn.textContent === "read" ? "not read" : "read"; 
+  removeBtn.textContent = "Remove"; 
+  removeBtn.classList.add("removeBtn");
+  bookDiv.appendChild(removeBtn);
+  cardContainer.appendChild(bookDiv);
 
-function changeReadStatus(event) {
-  if (event.target.classList.contains("changeStatus")) {
-    const bookInfo = event.target.parentElement;
-    const bookIndex = bookInfo.dataset.bookIndex;
-    myLibrary[bookIndex].haveRead =
-      myLibrary[bookIndex].haveRead === 'read' ? 'not read' : 'read';
-    const statusElement = bookInfo.querySelector(".readStatus");
-    statusElement.textContent = myLibrary[bookIndex].haveRead;
-  }
+
+  removeBtn.addEventListener("click", removeBook);
+  readBtn.addEventListener("click", changeReadStatus);
 }
 
-function removeBook(e) {
-  if (e.target.classList.contains("removeBtn")) {
-    const bookInfo = e.target.parentElement;
-    const bookIndex = bookInfo.dataset.bookIndex;
-    myLibrary.splice(bookIndex, 0);
-    bookInfo.remove();
-  }
+function changeReadStatus(book) {
+  book.read = !book.read;
+  render();
+  console.log(`changed status of ${bookDiv[i].title}`);
+}
+
+function removeBook(index) {
+  myLibrary.splice(index, 1);
+  render();
+  console.log(`removed book: ${bookDiv[i].title}`);
 }

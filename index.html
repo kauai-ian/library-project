@@ -34,26 +34,25 @@
     <div class="modal">
       <form class="formData">
         <span class="close">&times;</span>
-        <h3>Add a new book</h3>
+        <h3>Add New Book</h3>
         <label for="title">Title:</label>
-        <input type="text" id="title" name="title" />
+        <input type="text" id="title" name="title" required/>
         <label for="author">Author:</label>
-        <input type="text" id="author" name="author" />
+        <input type="text" id="author" name="author" required/>
         <label for="pages">Pages:</label>
-        <input type="text" id="pages" name="pages" />
-        <label for="haveRead">Have read status:</label>
-        <input type="text" id="haveRead" name="haveRead" />
+        <input type="number" id="pages" name="pages" required/>
+        <label for="read">Have read status:</label>
+        <input type="checkbox" id="read" name="read" value="yes"/>
         <input type="submit" value="submit" class="submitBtn" />
       </form>
     </div>
-    <div class="cards">
-      <div class="bookCard"></div>
+    <div class="cardContainer">
     </div>
     </section>
     <footer>
       <div class="footerContainer">
         <a href="https://github.com/kauai-ian" target="_blank">
-          <img src="./images/github.svg" alt="github" width="25px" />
+          <img src="./images/github.svg" alt="github" width="32px" />
           <p>Made on Planet Earth by Ian Tierney</p>
         </a>
       </div>
