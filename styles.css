@@ -106,16 +106,14 @@ header p {
   display: grid;
   grid-template-columns: repeat(auto-fit, 250px);
   grid-template-rows: repeat(250px);
-  row-gap: 10px;
+  gap: 20px;
   width: 98vw;
   height: auto;
   margin-left: 20px;
 }
 
 .book {
-  width: 30vw;
-  max-width: 300px;
-  min-width: 200px;
+  width: 250px;
   height: auto;
   max-height: 300px;
   margin: 10px;
@@ -284,7 +282,7 @@ footer {
     display: grid;
     grid-template-columns: 1fr;
     justify-items: center;
-    margin: 0;
+    margin: 10px;
   }
   .book {
     width: 90vw;
