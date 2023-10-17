@@ -6,8 +6,9 @@ The user can add new books, change the read status and remove the book.
 
 This project was built with HTML, CSS and Javascript.
 
-Desktop view
-![Alt text](<images/desktopSS.png>)
-Mobile view
-![Mobile view screenshot](</images/mobileSS.png>)
+### Desktop view
+<img src="images/desktopSS.png" width="800" alt="desktop view screenshot">
+
+### Mobile view
+<img src="images/mobileSS.png" width="400" alt="mobile view screenshot">
 
